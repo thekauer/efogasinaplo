@@ -11,7 +11,7 @@ import { NewRecord } from "./NewRecord/NewRecord";
 
 export const App = () => {
   let navigate = useNavigate();
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<User | null | undefined>(undefined);
   const [userId, setUserId] = useRecoilState(userIdAtom);
 
   useEffect(() => {
@@ -23,6 +23,7 @@ export const App = () => {
   }, []);
 
   useEffect(() => {
+    if (user === undefined) return;
     const isSignedIn = !!user?.uid;
 
     if (!isSignedIn) {
