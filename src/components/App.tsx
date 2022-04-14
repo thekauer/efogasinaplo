@@ -7,7 +7,7 @@ import { auth } from "../lib/firebase";
 import { Home } from "../pages/Home";
 import { List } from "../pages/List";
 import { Login } from "../pages/Login";
-import { NewRecord } from "./NewRecord";
+import { NewRecord } from "./NewRecord/NewRecord";
 
 export const App = () => {
   let navigate = useNavigate();

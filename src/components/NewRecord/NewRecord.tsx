@@ -5,6 +5,7 @@ import {
   Grid,
   Group,
   Image,
+  Select,
   Skeleton,
   Space,
   TextInput,
@@ -23,9 +24,11 @@ import {
   MapPin,
   Temperature,
 } from "tabler-icons-react";
-import { userIdAtom } from "../atoms/UserAtom";
-import { addCatch } from "../lib/firebase";
-import { ChooseWater } from "./ChooseWater";
+import { userIdAtom } from "../../atoms/UserAtom";
+import { addCatch } from "../../lib/firebase";
+import { species } from "../../lib/spcecies";
+import { ChooseWater } from "../ChooseWater";
+import * as S from "./NewRecord.atoms";
 
 interface Weather {
   coord: {
@@ -84,10 +87,12 @@ export const NewRecord = () => {
     initialValues: {
       weight: 0,
       length: 0,
+      species: "",
     },
     validationRules: {
       weight: (value) => value >= 1,
       length: (value) => value >= 1,
+      species: (value) => value.length > 0,
     },
   });
 
@@ -137,7 +142,7 @@ export const NewRecord = () => {
     }
   };
 
-  const onSubmit = async ({ length, weight }) => {
+  const onSubmit = async ({ length, weight, species }) => {
     if (!!userId && !!water && !!length && !!weight) {
       try {
         await addCatch(userId, {
@@ -149,6 +154,7 @@ export const NewRecord = () => {
           weather: { ...weather?.main },
           length: Number(length),
           weight: Number(weight),
+          species,
           water,
           date: Timestamp.now(),
           source,
@@ -183,7 +189,7 @@ export const NewRecord = () => {
         <Space h="md" />
         <Center>
           {!source ? (
-            <label htmlFor="photo">
+            <S.PhotoLabel htmlFor="photo">
               <input
                 style={{ display: "none" }}
                 type="file"
@@ -193,12 +199,24 @@ export const NewRecord = () => {
                 onChange={handleCapture}
               />
               <Camera />
-            </label>
+            </S.PhotoLabel>
           ) : (
-            <Image height={200} radius="md" src={source} alt="photo" />
+            <Image
+              height={200}
+              width={200}
+              radius="md"
+              src={source}
+              alt="photo"
+            />
           )}
         </Center>
 
+        <Select
+          label="Halfaj"
+          required
+          data={species.map((s) => ({ value: s, label: s }))}
+          onChange={form.getInputProps("species").onChange}
+        />
         <TextInput label="Hossz" required {...form.getInputProps("length")} />
         <TextInput label="Súly" required {...form.getInputProps("weight")} />
 

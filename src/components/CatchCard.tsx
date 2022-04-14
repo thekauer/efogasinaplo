@@ -14,14 +14,8 @@ export const CatchCard = ({ catchEntity }: CatchCardProps) => {
     <Card shadow="sm">
       <Grid justify="center">
         <Grid.Col span={6} style={colStyle}>
-          <Ruler2 />
-          {catchEntity.length}cm
+          {catchEntity.species}
         </Grid.Col>
-        <Grid.Col span={6} style={colStyle}>
-          <Scale />
-          {catchEntity.weight}kg
-        </Grid.Col>
-        <Grid.Col span={6} style={colStyle}></Grid.Col>
         <Grid.Col span={6} style={colStyle}>
           <Clock />{" "}
           {new Timestamp(catchEntity.date.seconds, catchEntity.date.nanoseconds)
@@ -31,6 +25,14 @@ export const CatchCard = ({ catchEntity }: CatchCardProps) => {
               month: "numeric",
               day: "numeric",
             })}
+        </Grid.Col>
+        <Grid.Col span={6} style={colStyle}>
+          <Ruler2 />
+          {catchEntity.length}cm
+        </Grid.Col>
+        <Grid.Col span={6} style={colStyle}>
+          <Scale />
+          {catchEntity.weight}kg
         </Grid.Col>
       </Grid>
     </Card>

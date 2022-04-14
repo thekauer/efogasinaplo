@@ -2,6 +2,7 @@ export interface Catch {
   date: any;
   weight: number;
   length: number;
+  species: string;
   source: string;
   position: { lon: number; name: string; lat: number };
   water: string;
