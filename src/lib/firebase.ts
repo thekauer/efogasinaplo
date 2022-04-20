@@ -18,6 +18,9 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import { firebaseConfig } from "./firebaseConfig";
+import { Aggregate } from "../types/aggregate";
+import { Species } from "./spcecies";
+import { watersByCode } from "./waters";
 
 export const app = initializeApp(firebaseConfig);
 export const analytics = getAnalytics(app);
@@ -27,16 +30,67 @@ export const db = initializeFirestore(app, {
 });
 
 enableIndexedDbPersistence(db).catch((err) => {
-  if (err.code == "failed-precondition") {
+  if (err.code === "failed-precondition") {
     console.log(
       "Multiple tabs open, persistence can only be enabled in one tab at a a time."
     );
-  } else if (err.code == "unimplemented") {
+  } else if (err.code === "unimplemented") {
     console.log(
       "The current browser does not support all of the features required to enable persistence"
     );
   }
 });
+
+const initAggregate = (): Aggregate => ({
+  dayCount: 0,
+  waters: {},
+  sum: {},
+});
+
+const updateAggregate = ({
+  aggregate,
+  waterCode,
+  weight,
+  species,
+  date,
+}: {
+  aggregate: Aggregate;
+  waterCode: string;
+  weight: number;
+  species: Species;
+  date: Date;
+}) => {
+  const water = aggregate.waters?.[waterCode] || {
+    name: watersByCode[waterCode].water,
+    code: waterCode,
+    species: {},
+  };
+  const speciesCount = water.species?.[species] || {
+    count: 0,
+    weight: 0,
+    date,
+  };
+  speciesCount.count++;
+  speciesCount.weight += weight;
+  water.species[species] = speciesCount;
+  const waters = aggregate.waters || {};
+  waters[waterCode] = water;
+  aggregate.waters = waters;
+  if (!aggregate.lastCatch || date > aggregate.lastCatch) {
+    aggregate.lastCatch = date;
+    if (!aggregate.dayCount) {
+      aggregate.dayCount = 1;
+    } else {
+      aggregate.dayCount++;
+    }
+  }
+
+  const sum = aggregate.sum || {};
+  sum[species] = (sum[species] || 0) + weight;
+  aggregate.sum = sum;
+
+  return aggregate;
+};
 
 export const addCatch = async (userId: string, catchEntity: any) => {
   await addDoc(collection(db, "users", userId, "catches"), catchEntity);
@@ -45,15 +99,19 @@ export const addCatch = async (userId: string, catchEntity: any) => {
 
   const currentAggregate: any = await getDoc(aggregateRef);
   if (!currentAggregate.data()) {
-    await setDoc(aggregateRef, {
-      catches: 1,
-      weight: catchEntity.weight,
-    });
+    await setDoc(aggregateRef, initAggregate()).catch(console.error);
   } else {
-    await updateDoc(aggregateRef, {
-      catches: currentAggregate.data().catches + 1,
-      weight: currentAggregate.data().weight + catchEntity.weight,
-    });
+    const { water: waterCode, weight, species, date } = catchEntity;
+    await updateDoc(
+      aggregateRef,
+      updateAggregate({
+        aggregate: currentAggregate.data(),
+        waterCode,
+        weight,
+        species,
+        date,
+      }) as any
+    ).catch(console.error);
   }
 };
 

@@ -17,3 +17,5 @@ export const species = [
   "Egyéb őshonos",
   "Egyéb idegenhonos",
 ];
+
+export type Species = typeof species[number];

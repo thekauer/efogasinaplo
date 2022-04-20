@@ -15,15 +15,7 @@ import { showNotification } from "@mantine/notifications";
 import { Timestamp } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
-import {
-  Camera,
-  Check,
-  Clock,
-  X,
-  Gauge,
-  MapPin,
-  Temperature,
-} from "tabler-icons-react";
+import { Camera, Check, Clock, X, Gauge, MapPin } from "tabler-icons-react";
 import { userIdAtom } from "../../atoms/UserAtom";
 import { addCatch } from "../../lib/firebase";
 import { species } from "../../lib/spcecies";
@@ -165,12 +157,13 @@ export const NewRecord = () => {
           icon: <Check />,
           color: "green",
         });
-      } catch {
+      } catch (error) {
         showNotification({
           message: "Valami hiba történt",
           icon: <X />,
           color: "red",
         });
+        console.error(error);
       }
     } else {
       showNotification({
