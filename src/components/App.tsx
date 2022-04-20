@@ -36,7 +36,10 @@ export const App = () => {
 
   return (
     <Routes>
-      <Route index element={<Home />} />
+      <Route
+        index
+        element={<Home username={user?.displayName?.split(" ")[1] as any} />}
+      />
       <Route path="login" element={<Login />} />
       <Route path="new" element={<NewRecord />} />
       <Route path="list" element={<List />} />

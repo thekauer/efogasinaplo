@@ -18,7 +18,7 @@ export const List = () => {
 
   return (
     <>
-      <h1>List</h1>
+      <h1>Fogások</h1>
       <SimpleGrid cols={1}>
         {catches.map((catchItem, index) => (
           <CatchCard
