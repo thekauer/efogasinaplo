@@ -120,3 +120,9 @@ export const getCatches = async (userId: string) => {
   const q = query(catches, orderBy("date", "desc"), limit(10));
   return await (await getDocs(q as any)).docs.map((doc) => doc.data());
 };
+
+export const getAggregate = async (userId: string): Promise<Aggregate> => {
+  const aggregateRef = doc(db, "aggregate", userId);
+  const aggregate = await getDoc(aggregateRef);
+  return aggregate.data() as any;
+};

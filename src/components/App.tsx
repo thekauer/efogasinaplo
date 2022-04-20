@@ -6,6 +6,7 @@ import { userIdAtom } from "../atoms/UserAtom";
 import { auth } from "../lib/firebase";
 import { Home } from "../pages/Home";
 import { List } from "../pages/List";
+import Log from "../pages/Log";
 import { Login } from "../pages/Login";
 import { NewRecord } from "./NewRecord/NewRecord";
 
@@ -43,6 +44,7 @@ export const App = () => {
       <Route path="login" element={<Login />} />
       <Route path="new" element={<NewRecord />} />
       <Route path="list" element={<List />} />
+      <Route path="log" element={<Log />} />
       {/* <Route path="catches" element={}>
             <Route path=":catchId" element={} />
             <Route path="new" element={} />

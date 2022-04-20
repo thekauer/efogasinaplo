@@ -10,7 +10,7 @@ export const MobileNavbar = () => {
   const homeClick = () => navigate("/");
   const listClick = () => navigate("/list");
   const plusClick = () => navigate("/new");
-  const analyticsClick = () => navigate("/analytics");
+  const analyticsClick = () => navigate("/log");
   const signOutClick = () => signOut(auth);
 
   return (
