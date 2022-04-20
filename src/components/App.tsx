@@ -24,7 +24,7 @@ export const App = () => {
   }, []);
 
   useEffect(() => {
-    if (user === undefined) return;
+    // if (user === undefined) return;
     const isSignedIn = !!user?.uid;
 
     if (!isSignedIn) {
