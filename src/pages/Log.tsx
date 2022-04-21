@@ -11,7 +11,6 @@ const Log = () => {
   const userId = useRecoilValue(userIdAtom);
   const [log, setLog] = useState<Aggregate>();
   const { t } = useTranslation();
-  console.log("🚀 - log", log);
 
   useEffect(() => {
     if (!log && userId) {
