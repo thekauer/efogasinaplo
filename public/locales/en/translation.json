@@ -1,0 +1,53 @@
+{
+  "home": {
+    "hi": "Hi",
+    "pwaAlert": {
+      "title": "No internet connection?",
+      "description": "Install the application and use it anywhere, anytime without internet connection.",
+      "install": "Install"
+    }
+  },
+  "list": {
+    "title": "Catches"
+  },
+  "newRecord": {
+    "species": "Fish species",
+    "length": "Length",
+    "weight": "Weight",
+    "province": "Province",
+    "waterZone": "Water zone",
+    "save": "Save"
+  },
+  "log": {
+    "title": "Log",
+    "waterArea": "Water area",
+    "name": "name",
+    "code": "code",
+    "sum": "Sum",
+    "pieces": "pieces",
+    "daysSpentFishing": "Days spent fishing"
+  },
+  "settings": {
+    "title": "Settings",
+    "signOut": "Sign out"
+  },
+  "species": {
+    "carp": "Carp",
+    "tench": "Tench",
+    "balin": "Balin",
+    "mullet": "Mullet",
+    "trout": "Trout",
+    "pike": "Pike",
+    "toothfish": "Toothfish",
+    "perch": "Perch",
+    "catfish": "Catfish",
+    "burbot": "Burbot",
+    "sterlet": "Sterlet",
+    "crucian": "Crucian",
+    "ziege": "Ziege",
+    "amur": "Amur",
+    "eel": "Eel",
+    "otherNative": "Other native",
+    "otherForeign": "Other foreign"
+  }
+}

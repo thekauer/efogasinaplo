@@ -14,11 +14,12 @@ import { useForm } from "@mantine/hooks";
 import { showNotification } from "@mantine/notifications";
 import { Timestamp } from "firebase/firestore";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useRecoilValue } from "recoil";
 import { Camera, Check, Clock, X, Gauge, MapPin } from "tabler-icons-react";
 import { userIdAtom } from "../../atoms/UserAtom";
 import { addCatch } from "../../lib/firebase";
-import { species } from "../../lib/spcecies";
+import { species, species_en } from "../../lib/spcecies";
 import { ChooseWater } from "../ChooseWater";
 import * as S from "./NewRecord.atoms";
 
@@ -74,6 +75,7 @@ export const NewRecord = () => {
   const [water, setWater] = useState<string>();
   const [source, setSource] = useState<string>("" /* important  */);
   const userId = useRecoilValue(userIdAtom);
+  const { t } = useTranslation();
 
   const form = useForm({
     initialValues: {
@@ -205,13 +207,24 @@ export const NewRecord = () => {
         </Center>
 
         <Select
-          label="Halfaj"
+          label={t("newRecord.species")}
           required
-          data={species.map((s) => ({ value: s, label: s }))}
+          data={species.map((s, index) => ({
+            value: s,
+            label: t(`species.${species_en[index]}`),
+          }))}
           onChange={form.getInputProps("species").onChange}
         />
-        <TextInput label="Hossz" required {...form.getInputProps("length")} />
-        <TextInput label="Súly" required {...form.getInputProps("weight")} />
+        <TextInput
+          label={t("newRecord.length")}
+          required
+          {...form.getInputProps("length")}
+        />
+        <TextInput
+          label={t("newRecord.weight")}
+          required
+          {...form.getInputProps("weight")}
+        />
 
         <ChooseWater onChange={onWaterChange} />
 
@@ -257,7 +270,7 @@ export const NewRecord = () => {
         </Box>
 
         <Group position="center" mt="md">
-          <Button type="submit">Mentés</Button>
+          <Button type="submit">{t("newRecord.save")}</Button>
         </Group>
       </form>
     </Box>

@@ -8,6 +8,7 @@ import { Home } from "../pages/Home";
 import { List } from "../pages/List";
 import Log from "../pages/Log";
 import { Login } from "../pages/Login";
+import Settings from "../pages/Settings";
 import { NewRecord } from "./NewRecord/NewRecord";
 
 export const App = () => {
@@ -45,6 +46,7 @@ export const App = () => {
       <Route path="new" element={<NewRecord />} />
       <Route path="list" element={<List />} />
       <Route path="log" element={<Log />} />
+      <Route path="settings" element={<Settings />} />
       {/* <Route path="catches" element={}>
             <Route path=":catchId" element={} />
             <Route path="new" element={} />

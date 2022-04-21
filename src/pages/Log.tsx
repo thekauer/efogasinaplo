@@ -1,14 +1,16 @@
 import { Table } from "@mantine/core";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useRecoilValue } from "recoil";
 import { userIdAtom } from "../atoms/UserAtom";
 import { getAggregate } from "../lib/firebase";
-import { species } from "../lib/spcecies";
+import { species, species_en } from "../lib/spcecies";
 import { Aggregate } from "../types/aggregate";
 
 const Log = () => {
   const userId = useRecoilValue(userIdAtom);
   const [log, setLog] = useState<Aggregate>();
+  const { t } = useTranslation();
   console.log("🚀 - log", log);
 
   useEffect(() => {
@@ -27,7 +29,7 @@ const Log = () => {
       <td>
         kg
         <br />
-        db
+        {t("log.pieces")}
       </td>
       {species.map((species) => (
         <td key={species}>
@@ -41,7 +43,7 @@ const Log = () => {
   const lastRow = (
     <tr>
       <td>
-        <strong>Összesen</strong>
+        <strong>{t("log.sum")}</strong>
       </td>
       <td>kg</td>
       {species.map((species) => (
@@ -52,20 +54,20 @@ const Log = () => {
 
   return (
     <>
-      <h1>Napló</h1>
+      <h1>{t("log.title")}</h1>
       {log && (
         <div style={{ overflow: "auto" }}>
           <Table>
             <thead>
               <tr>
                 <th>
-                  Vízterület neve
+                  {t("log.waterArea")} {t("log.name")}
                   <br />
-                  kódja
+                  {t("log.code")}
                 </th>
                 <th></th>
-                {species.map((name) => (
-                  <th key={name}>{name}</th>
+                {species_en.map((name) => (
+                  <th key={name}>{t(`species.${name}`)}</th>
                 ))}
               </tr>
             </thead>
@@ -77,7 +79,9 @@ const Log = () => {
         </div>
       )}
       <br />
-      <span>Horgászattal töltött napok száma: {log?.dayCount}</span>
+      <span>
+        {t("log.daysSpentFishing")}: {log?.dayCount}
+      </span>
     </>
   );
 };

@@ -1,0 +1,53 @@
+{
+  "home": {
+    "hi": "Szia",
+    "pwaAlert": {
+      "title": "Nem vagy netközelben?",
+      "description": "Telepítsd az alkalmazást, és használd bárhol bármikor internet nélkül is.",
+      "install": "Telepít"
+    }
+  },
+  "list": {
+    "title": "Fogások"
+  },
+  "newRecord": {
+    "species": "Halfaj",
+    "length": "Hossz",
+    "weight": "Súly",
+    "province": "Megye",
+    "waterZone": "Víztér",
+    "save": "Mentés"
+  },
+  "log": {
+    "title": "Napló",
+    "waterArea": "Vízterület",
+    "name": "neve",
+    "code": "kódja",
+    "sum": "Összesen",
+    "pieces": "db",
+    "daysSpentFishing": "Horgászattal töltött napok száma"
+  },
+  "settings": {
+    "title": "Beállítások",
+    "signOut": "Kijelentkezés"
+  },
+  "species": {
+    "carp": "Ponty",
+    "tench": "Compó",
+    "balin": "Balin",
+    "mullet": "Márna",
+    "trout": "Sebes pisztráng",
+    "pike": "Csuka",
+    "toothfish": "Fogassüllő",
+    "perch": "Kősüllő",
+    "catfish": "Harcsa",
+    "burbot": "Menyhal",
+    "sterlet": "Kecsege",
+    "crucian": "Széleskárász",
+    "ziege": "Garda",
+    "amur": "Amur",
+    "eel": "Angolna",
+    "otherNative": "Egyéb őshonos",
+    "otherForeign": "Egyéb idegenhonos"
+  }
+}

@@ -1,4 +1,5 @@
 import { Alert, Button } from "@mantine/core";
+import { useTranslation } from "react-i18next";
 import { usePwa } from "../lib/pwaInstall";
 
 interface HomeProps {
@@ -7,18 +8,20 @@ interface HomeProps {
 
 export const Home = ({ username }: HomeProps) => {
   const { isSupported, isInstalled, install } = usePwa();
+  const { t } = useTranslation();
 
   return (
     <>
-      {username && <h1>Szia {username}</h1>}
+      {username && (
+        <h1>
+          {t("home.hi")} {username}
+        </h1>
+      )}
       {
         /*isSupported() && !isInstalled*/ true && (
-          <Alert title="Nem vagy netközelben?">
-            <p>
-              Telepítsd az alkalmazást, és használd bárhol bármikor internet
-              nélkül is.
-            </p>
-            <Button onClick={install}>Telepít</Button>
+          <Alert title={t("home.pwaAlert.title")}>
+            <p>{t("home.pwaAlert.description")}</p>
+            <Button onClick={install}>{t("home.pwaAlert.install")}</Button>
           </Alert>
         )
       }

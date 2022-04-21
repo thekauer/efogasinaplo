@@ -10,6 +10,8 @@ import { AppShell, MantineProvider } from "@mantine/core";
 import { NotificationsProvider } from "@mantine/notifications";
 import { MobileNavbar } from "./components/MobileNavbar";
 
+import "./lib/i18n";
+
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );

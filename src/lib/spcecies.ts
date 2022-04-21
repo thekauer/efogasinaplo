@@ -18,4 +18,24 @@ export const species = [
   "Egyéb idegenhonos",
 ];
 
+export const species_en = [
+  "carp",
+  "tench",
+  "balin",
+  "mullet",
+  "trout",
+  "pike",
+  "toothfish",
+  "perch",
+  "catfish",
+  "burbot",
+  "sterlet",
+  "crucian",
+  "ziege",
+  "amur",
+  "eel",
+  "otherNative",
+  "otherForeign",
+];
+
 export type Species = typeof species[number];

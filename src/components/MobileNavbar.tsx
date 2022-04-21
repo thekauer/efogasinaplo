@@ -1,8 +1,12 @@
 import { Button, Center, Grid, Group, Navbar } from "@mantine/core";
-import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-import { Home2, List, Plus, ReportAnalytics, Logout } from "tabler-icons-react";
-import { auth } from "../lib/firebase";
+import {
+  Home2,
+  List,
+  Plus,
+  ReportAnalytics,
+  Settings,
+} from "tabler-icons-react";
 
 export const MobileNavbar = () => {
   let navigate = useNavigate();
@@ -11,7 +15,7 @@ export const MobileNavbar = () => {
   const listClick = () => navigate("/list");
   const plusClick = () => navigate("/new");
   const analyticsClick = () => navigate("/log");
-  const signOutClick = () => signOut(auth);
+  const settingsClick = () => navigate("/settings");
 
   return (
     <Navbar
@@ -38,8 +42,8 @@ export const MobileNavbar = () => {
         <Button variant="outline" onClick={analyticsClick}>
           <ReportAnalytics />
         </Button>
-        <Button variant="outline">
-          <Logout onClick={signOutClick} />
+        <Button variant="outline" onClick={settingsClick}>
+          <Settings />
         </Button>
       </Group>
     </Navbar>
